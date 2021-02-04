@@ -1,13 +1,13 @@
 import { Container, AppBar, Typography, Grow, Grid } from '@material-ui/core';
 import { Posts } from './components/Posts/Posts';
 import { Form } from './components/Form/Form';
-import React from 'react';
-import memories from './images/memories.png';
-import useStyles from './styles';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { getPosts } from './actions/postsActions';
 import { useState } from 'react';
+import React from 'react';
+import memories from './images/memories.png';
+import useStyles from './styles';
 
 function App() {
   const [currentId, setCurrentId] = useState(null);
