@@ -7,8 +7,10 @@ import useStyles from './styles';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { getPosts } from './actions/postsActions';
+import { useState } from 'react';
 
 function App() {
+  const [currentId, setCurrentId] = useState(null);
   const classes = useStyles();
   const dispatch = useDispatch();
   useEffect(() => {
@@ -29,12 +31,13 @@ function App() {
             justify="space-between"
             alignItems="stretch"
             spacing="3"
+            className={classes.mainContainer}
           >
             <Grid item xs={12} sm={7}>
-              <Posts></Posts>
+              <Posts setCurrentId={setCurrentId}></Posts>
             </Grid>
             <Grid item xs={12} sm={4}>
-              <Form></Form>
+              <Form currentId={currentId} setCurrentId={setCurrentId}></Form>
             </Grid>
           </Grid>
         </Container>

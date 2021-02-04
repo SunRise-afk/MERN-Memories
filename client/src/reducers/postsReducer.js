@@ -1,4 +1,9 @@
-import { CREATE_POST, FETCH_ALL } from '../actions/actionTypes';
+import {
+  CREATE_POST,
+  DELETE_POST,
+  FETCH_ALL,
+  UPDATE_POST,
+} from '../actions/actionTypes';
 // import initialPost from '../images/initialPost.jpg';
 // const initialState = [
 //   {
@@ -17,7 +22,12 @@ export const postsReducer = (state = [], action) => {
       return action.payload;
     case CREATE_POST:
       return [...state, action.payload];
-
+    case UPDATE_POST:
+      return state.map((post) =>
+        post._id === action.payload._id ? action.payload : post
+      );
+    case DELETE_POST:
+      return state.filter((post) => post._id !== action.payload);
     default:
       return state;
   }
