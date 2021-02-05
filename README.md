@@ -1,7 +1,7 @@
 # MERN-Memories
 Memories app using React, Express, Node and MongoDB
 
-in app to fase and light design was used components from material-ui
+in app to fast and light design was used components from material-ui
 # Client side of app was deployed at Netlify
 https://sunrise-memorise-project.netlify.app
 
