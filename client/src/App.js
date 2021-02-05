@@ -1,8 +1,8 @@
+import React from 'react';
 import { Home } from './components/Home/Home';
 import { Navbar } from './components/Navbar/Navbar';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { Container } from '@material-ui/core';
-import React from 'react';
 import { Auth } from './components/Auth/Auth';
 
 function App() {
