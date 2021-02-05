@@ -11,14 +11,18 @@ export const Input = ({
   label,
   handleChange,
   handleShowPassword,
+  value,
 }) => {
   return (
     <Grid item xs={12} sm={half ? 6 : 12}>
       <TextField
         name={name}
         label={label}
-        onChange={handleChange}
-        variang="outlined"
+        onChange={(event) => {
+          handleChange(event);
+        }}
+        value={value}
+        variant="outlined"
         required
         fullWidth
         autoFocus={autoFocus}

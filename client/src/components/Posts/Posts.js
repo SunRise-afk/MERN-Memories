@@ -8,7 +8,7 @@ export const Posts = ({ setCurrentId }) => {
   const classes = useStyles();
   const posts = useSelector((state) => state.posts);
   return !posts.length ? (
-    <CircularProgress color='secondary'></CircularProgress>
+    <CircularProgress color="secondary"></CircularProgress>
   ) : (
     <Grid
       className={classes.mainContainer}
@@ -18,7 +18,7 @@ export const Posts = ({ setCurrentId }) => {
     >
       {posts.map((post) => {
         return (
-          <Grid key={post.id} item xs={12} sm={6}>
+          <Grid key={post._id} item xs={12} sm={6}>
             <Post post={post} setCurrentId={setCurrentId}></Post>
           </Grid>
         );

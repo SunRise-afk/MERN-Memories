@@ -12,7 +12,11 @@ import { Input } from './Input';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { authActionCreator } from '../../actions/authActions';
+import {
+  authActionCreator,
+  signUpActionCreator,
+  signInActionCreator,
+} from '../../actions/authActions';
 import LockOutlineIcon from '@material-ui/icons/LockOpenOutlined';
 import useStyles from './styles';
 import Icon from './Icon';
@@ -20,13 +24,27 @@ import Icon from './Icon';
 export const Auth = () => {
   const [showPasword, setShowPasword] = useState(false);
   const [isSignup, setIsSignup] = useState(true);
+  const [formData, setFormData] = useState({
+    firstName: 'asd',
+    lastName: '',
+    email: '',
+    password: '',
+    confirmPassword: '',
+  });
   const dispatch = useDispatch();
   const history = useHistory();
   const classes = useStyles();
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (isSignup) {
+      dispatch(signUpActionCreator(formData, history));
+    } else {
+      dispatch(signInActionCreator(formData, history));
+    }
   };
-  const handleChange = () => {};
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
   const handleShowPassword = () => {
     setShowPasword(!showPasword);
   };
@@ -63,30 +81,32 @@ export const Auth = () => {
                   label="First Name"
                   name="firstName"
                   handleChange={handleChange}
+                  value={formData.firstName}
                   half
                 ></Input>
                 <Input
-                  name="email"
-                  label="Email Address"
+                  name="lastName"
+                  label="Last Name"
                   handleChange={handleChange}
+                  value={formData.lastName}
                   type="email"
                   half
                 ></Input>
               </>
             )}
-            {!isSignup && (
-              <Input
-                name="email"
-                label="Email Address"
-                handleChange={handleChange}
-                type="email"
-              ></Input>
-            )}
+            <Input
+              name="email"
+              label="Email Address"
+              handleChange={handleChange}
+              value={formData.email}
+              type="email"
+            ></Input>
             <Input
               name="password"
               label="Password"
               handleChange={handleChange}
               handleShowPassword={handleShowPassword}
+              value={formData.password}
               type={showPasword ? 'text' : 'password'}
             ></Input>
             {isSignup && (
@@ -94,6 +114,7 @@ export const Auth = () => {
                 name="confirmPassword"
                 label="Repeat Password"
                 handleChange={handleChange}
+                value={formData.confirmPassword}
                 type="password"
               ></Input>
             )}

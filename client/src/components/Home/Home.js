@@ -22,7 +22,7 @@ export const Home = () => {
           container
           justify="space-between"
           alignItems="stretch"
-          spacing="3"
+          spacing={3}
           className={classes.mainContainer}
         >
           <Grid item xs={12} sm={7}>
