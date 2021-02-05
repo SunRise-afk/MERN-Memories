@@ -1,5 +1,5 @@
 import axios from 'axios';
-const url = '/posts';
+const url = 'https://sunrise-memories-project.herokuapp.com/posts';
 
 export const fetchPosts = () => axios.get(url);
 export const createPost = (newPost) => axios.post(url, newPost);

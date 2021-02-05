@@ -9,7 +9,7 @@ export const Posts = ({ setCurrentId }) => {
   const posts = useSelector((state) => state.posts);
   console.log(posts);
   return !posts.length ? (
-    <CircularProgress></CircularProgress>
+    <CircularProgress color='secondary'></CircularProgress>
   ) : (
     <Grid
       className={classes.mainContainer}
