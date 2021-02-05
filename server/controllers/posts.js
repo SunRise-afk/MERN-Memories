@@ -55,11 +55,9 @@ export const likePost = async (req, res) => {
     return res.status(404).send('No post with such id');
   }
   const post = await PostMessage.findById(_id);
-  console.log(post.likes);
   const index = post.likes.findIndex((id) => {
     return id === String(req.userId);
   });
-  console.log(index);
   if (index === -1) {
     post.likes.push(req.userId);
   } else {

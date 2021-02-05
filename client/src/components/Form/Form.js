@@ -40,10 +40,19 @@ export const Form = ({ currentId, setCurrentId }) => {
     e.preventDefault();
     if (currentId) {
       dispatch(
-        updatePost(currentId, { ...postData, creatorName: user?.result?.name })
+        updatePost(currentId, {
+          ...postData,
+          creatorName: user?.result?.name,
+        })
       );
     } else {
-      dispatch(createPost({ ...postData, creatorName: user?.result?.name }));
+      dispatch(
+        createPost({
+          ...postData,
+          tags: postData.tags.split(', '),
+          creatorName: user?.result?.name,
+        })
+      );
     }
     clearHandler();
   };
@@ -67,18 +76,6 @@ export const Form = ({ currentId, setCurrentId }) => {
         <Typography variant="h6">
           {currentId ? 'Editing' : 'Creating'} a memory
         </Typography>
-        {/* <TextField
-          name="creator"
-          variant="outlined"
-          label="Creator"
-          fullWidth
-          value={postData.creator}
-          onChange={(e) => {
-            setPostData((state) => {
-              return { ...state, creator: e.target.value };
-            });
-          }}
-        ></TextField> */}
         <TextField
           name="title"
           variant="outlined"
@@ -111,7 +108,7 @@ export const Form = ({ currentId, setCurrentId }) => {
           value={postData.tags}
           onChange={(e) => {
             setPostData((state) => {
-              return { ...state, tags: e.target.value.split(', ') };
+              return { ...state, tags: e.target.value };
             });
           }}
         ></TextField>

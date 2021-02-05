@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { logoutActionCreator } from '../../actions/authActions';
+import decode from 'jwt-decode';
 import React from 'react';
 import useStyles from './styles';
 import memories from '../../images/memories.png';
@@ -14,16 +15,22 @@ export const Navbar = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const location = useLocation();
-
-  useEffect(() => {
-    // const token = user?.token;
-    setUser(JSON.parse(localStorage.getItem('profile')));
-  }, [location]);
   const logout = () => {
     dispatch(logoutActionCreator());
     history.push('/');
     setUser(null);
   };
+  useEffect(() => {
+    const token = user?.token;
+    if (token) {
+      const decodedToken = decode(token);
+      if (decodedToken.exp * 1000 < new Date().getTime()) {
+        logout();
+      }
+    }
+    setUser(JSON.parse(localStorage.getItem('profile')));
+  }, [location]);
+
   return (
     <AppBar className={classes.appBar} position="static" color="inherit">
       <div className={classes.brandContainer}>
