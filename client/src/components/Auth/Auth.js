@@ -22,10 +22,10 @@ import useStyles from './styles';
 import Icon from './Icon';
 
 export const Auth = () => {
-  const [showPasword, setShowPasword] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
   const [isSignup, setIsSignup] = useState(true);
   const [formData, setFormData] = useState({
-    firstName: 'asd',
+    firstName: '',
     lastName: '',
     email: '',
     password: '',
@@ -46,11 +46,11 @@ export const Auth = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
   const handleShowPassword = () => {
-    setShowPasword(!showPasword);
+    setShowPassword(!showPassword);
   };
   const switchMode = () => {
     setIsSignup(!isSignup);
-    setShowPasword(false);
+    setShowPassword(false);
   };
   const googleSucess = async (res) => {
     const result = res?.profileObj;
@@ -89,7 +89,6 @@ export const Auth = () => {
                   label="Last Name"
                   handleChange={handleChange}
                   value={formData.lastName}
-                  type="email"
                   half
                 ></Input>
               </>
@@ -107,7 +106,7 @@ export const Auth = () => {
               handleChange={handleChange}
               handleShowPassword={handleShowPassword}
               value={formData.password}
-              type={showPasword ? 'text' : 'password'}
+              type={showPassword ? 'text' : 'password'}
             ></Input>
             {isSignup && (
               <Input
