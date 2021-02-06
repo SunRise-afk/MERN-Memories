@@ -10,7 +10,7 @@ import {
 import { GoogleLogin } from 'react-google-login';
 import { Input } from './Input';
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import {
   authActionCreator,
@@ -31,6 +31,10 @@ export const Auth = () => {
     password: '',
     confirmPassword: '',
   });
+  const authErrorMessage = useSelector((state) => state.auth.authError);
+  const authErrorVisibility = useSelector(
+    (state) => state.auth.isAuthErrorVisible
+  );
   const dispatch = useDispatch();
   const history = useHistory();
   const classes = useStyles();
@@ -73,6 +77,9 @@ export const Auth = () => {
           <LockOutlineIcon></LockOutlineIcon>
         </Avatar>
         <Typography variant="h5">{isSignup ? 'Sign up' : 'Sign in'}</Typography>
+        {authErrorVisibility && (
+          <Typography variant="h5">{authErrorMessage}</Typography>
+        )}
         <form className={classes.form} onSubmit={handleSubmit}>
           <Grid container spacing={2}>
             {isSignup && (
