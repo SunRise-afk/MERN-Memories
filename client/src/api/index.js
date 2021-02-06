@@ -1,9 +1,11 @@
 import axios from 'axios';
 // url for production uses
-// const url = 'https://sunrise-memories-project.herokuapp.com/posts';
+const API = axios.create({
+  baseURL: 'https://sunrise-memories-project.herokuapp.com',
+});
 
 // url for development uses
-const API = axios.create({ baseURL: 'http://localhost:5000' });
+// const API = axios.create({ baseURL: 'http://localhost:5000' });
 API.interceptors.request.use((req) => {
   if (localStorage.getItem('profile')) {
     req.headers.Authorization = `Bearer ${
